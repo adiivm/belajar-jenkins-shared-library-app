@@ -6,9 +6,19 @@ pipeline {
     }
     
     stages {
-        stage('Hello') {
+        stage('Build') {
             steps {
-                echo ("Hello World Adi")
+                echo ("We are Build something here")
+            }
+        }
+        stage('Test') {
+            steps {
+                echo ("We are Testing something here")
+            }
+        }
+        stage('Deploy') {
+            steps {
+                echo ("We are Deploying something here")
             }
         }
     }
