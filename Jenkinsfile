@@ -8,18 +8,16 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                echo ("We are Build something here 1")
-                sleep(10)
-                echo ("We are Build something here 2")
-                echo ("We are Build something here 3")
+                echo ("Start Build")
+                sh("./mvnw clean compile test-compile")
+                echo ("Finish Build")
             }
         }
         stage('Test') {
             steps {
-                echo ("We are Testing something here 1")
-                sleep(10)
-                echo ("We are Testing something here 2")
-                echo ("We are Testing something here 3")
+                echo ("Start Test")
+                sh("./mvnw test")
+                echo ("Finish Test")
             }
         }
         stage('Deploy') {
