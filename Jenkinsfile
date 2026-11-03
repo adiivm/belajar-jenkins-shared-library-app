@@ -8,17 +8,26 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                echo ("We are Build something here")
+                echo ("We are Build something here 1")
+                sleep(10)
+                echo ("We are Build something here 2")
+                echo ("We are Build something here 3")
             }
         }
         stage('Test') {
             steps {
-                echo ("We are Testing something here")
+                echo ("We are Testing something here 1")
+                sleep(10)
+                echo ("We are Testing something here 2")
+                echo ("We are Testing something here 3")
             }
         }
         stage('Deploy') {
             steps {
-                echo ("We are Deploying something here")
+                echo ("We are Deploying something here 1")
+                echo ("We are Deploying something here 2")
+                sleep(10)
+                echo ("We are Deploying something here 3")
             }
         }
     }
