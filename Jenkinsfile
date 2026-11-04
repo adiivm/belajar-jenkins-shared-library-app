@@ -2,6 +2,20 @@ pipeline {
     agent none
     
     stages {
+        stage("Prepare") {
+            agent {
+                node {
+                    label "linux && java11"
+                }
+            }
+            steps {
+                echo("Start Job : ${env.JOB_NAME}")
+                echo("Start Build : ${env.BUILD_NUMBER}")
+                echo("Branch Name : ${env.BRANCH_NAME}")
+            }
+        }
+
+        
         stage('Build') {
             agent {
                 node {
@@ -20,6 +34,11 @@ pipeline {
             }
         }
         stage('Test') {
+            agent {
+                node {
+                    label "linux && java11"
+                }
+            }
             steps {
                 
                 script {
@@ -32,6 +51,11 @@ pipeline {
             }
         }
         stage('Deploy') {
+            agent {
+                node {
+                    label "linux && java11"
+                }
+            }
             steps {
                 echo ("We are Deploying something here 1")
                 echo ("We are Deploying something here 2")
