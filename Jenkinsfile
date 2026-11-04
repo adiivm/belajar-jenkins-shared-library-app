@@ -4,11 +4,11 @@ pipeline {
     environment {
         AUTHOR = "Adi Kurniadi"
         EMAIL = "adi.kurniadi@gmail.com"
-        WEB = "hhtps://dekurtz.blogspot.com"
+        WEB = "https://dekurtz.blogspot.com"
     }
 
     options {
-        disableConcurrentBuilds()
+        disableConcurrentBuilds(abortPrevious: false) 
         timeout(time: 10, unit: 'MINUTES')
     }
     
