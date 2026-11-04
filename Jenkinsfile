@@ -7,6 +7,12 @@ pipeline {
         WEB = "https://dekurtz.blogspot.com"
     }
 
+    triggers {
+        cron("*/5 * * * *")
+        pollSCM("*/5 * * * *")
+        upstream(upstreamProjects: 'job1,job2', threshold:hudson.model.Result.SUCCESS)
+    }
+
     parameters {
         string(name: "NAME", defaultValue: "Guest", description: "What is your name?")
         text(name: "DESCRIPTION", defaultValue: "Guest", description: "Tell me about you")
@@ -35,7 +41,7 @@ pipeline {
                 echo "You description is ${params.DESCRIPTION}"
                 echo "Your social media is ${params.SOCIAL_MEDIA}"
                 echo "Need to deploy : ${params.DEPLOY} to deploy!"
-                echo "Your secre is ${params.SECRET}"
+                echo "Your secret is ${params.SECRET}"
             }
         }
         stage("Prepare") {
