@@ -12,7 +12,7 @@ pipeline {
         text(name: "DESCRIPTION", defaultValue: "Guest", description: "Tell me about you")
         booleanParam(name: "DEPLOY_TO_PROD", defaultValue: false, description: "Need to Deploy?")
         choice(name: "SOCIAL_MEDIA", choices: ['IG', 'FB', 'TWIT'], description: "Which Social Media?")
-        password(name: "SECRET", defaultvalue: "", description: "Encrypt Key")
+        password(name: "SECRET", defaultValue: "", description: "Encrypt Key")
     }
 
     options {
@@ -32,10 +32,10 @@ pipeline {
             }
             steps {
                 echo "Hello ${params.NAME}"
-                echo "Description: ${params.DESCRIPTION}"
-                echo "Deploy: ${params.DEPLOY}"
-                echo "Social Media: ${params.SOCIAL_MEDIA}"
-                echo "Secret: ${params.SECRET}"
+                echo "You description is ${params.DESCRIPTION}"
+                echo "Your social media is ${params.SOCIAL_MEDIA}"
+                echo "Need to deploy : ${params.DEPLOY} to deploy!"
+                echo "Your secre is ${params.SECRET}"
             }
         }
         stage("Prepare") {
