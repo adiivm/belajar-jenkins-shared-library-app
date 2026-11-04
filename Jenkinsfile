@@ -7,12 +7,37 @@ pipeline {
         WEB = "https://dekurtz.blogspot.com"
     }
 
+    parameters {
+        string(name: "NAME", defaultValue: "Guest", description: "What is your name?")
+        text(name: "DESCRIPTION", defaultValue: "Guest", description: "Tell me about you")
+        booleanParam(name: "DEPLOY_TO_PROD", defaultValue: false, description: "Need to Deploy?")
+        choice(name: "SOCIAL_MEDIA", choices: ['IG', 'FB', 'TWIT'], description: "Which Social Media?")
+        password(name: "SECRET", defaultvalue: "", description: "Encrypt Key")
+    }
+
     options {
         disableConcurrentBuilds(abortPrevious: false) 
         timeout(time: 10, unit: 'MINUTES')
     }
     
     stages {
+        stage("Parameter") {
+            environment {
+                APP = credentials("adi_kurniadi")
+            }
+            agent {
+                node {
+                    label "linux && java11"
+                }
+            }
+            steps {
+                echo "Hello ${params.NAME}"
+                echo "Description: ${params.DESCRIPTION}"
+                echo "Deploy: ${params.DEPLOY}"
+                echo "Social Media: ${params.SOCIAL_MEDIA}"
+                echo "Secret: ${params.SECRET}"
+            }
+        }
         stage("Prepare") {
             environment {
                 APP = credentials("adi_kurniadi")
