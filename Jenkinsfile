@@ -7,11 +7,11 @@ pipeline {
         WEB = "https://dekurtz.blogspot.com"
     }
 
-    triggers {
-        cron("*/5 * * * *")
-        // pollSCM("*/5 * * * *")
-        upstream(upstreamProjects: 'job1,job2', threshold:hudson.model.Result.SUCCESS)
-    }
+    // triggers {
+    //     // cron("*/5 * * * *")
+    //     // pollSCM("*/5 * * * *")
+    //     upstream(upstreamProjects: 'job1,job2', threshold:hudson.model.Result.SUCCESS)
+    // }
 
     parameters {
         string(name: "NAME", defaultValue: "Guest", description: "What is your name?")
@@ -39,14 +39,12 @@ pipeline {
                         echo("Prepare Java")
                     }
                 }
-            }
-            stages {
                 stage("Prepare Maven") {
                     steps {
                         echo("Prepare Maven")
                     }
                 }
-            }
+
         }
         
         stage("Parameter") {
