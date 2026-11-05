@@ -190,24 +190,25 @@ pipeline {
             }
         }
 
-        stage('Release') {
+          stage('Release') {
             when {
                 expression {
                     return params.DEPLOY
                 }
             }
             agent {
-                node{
+                node {
                     label "linux && java11"
                 }
             }
             steps {
                 withCredentials([usernamePassword(
-                    credentialsId: "adi_kurniadi"
-                    usernameVariable: "USER",
+                    credentialsId: "adi_kurniadi", // Added comma
+                    usernameVariable: "USER",       // Added comma
                     passwordVariable: "PASSWORD"
                 )]) {
-                    sh('echo "Release it with -u $USER -p $PASSWORD" > "release.txt"')
+                    // Corrected quotes and string structure for the shell execution
+                    sh "echo 'Release it with -u $USER -p $PASSWORD' > release.txt"
                 }
             }
         }
