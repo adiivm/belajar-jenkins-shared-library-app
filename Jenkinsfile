@@ -106,7 +106,7 @@ pipeline {
                 ok "Yes, of course"
                 submitter "pzn,adi"
                 parameters {
-                    choice(name: "Target_ENV", choices: ['DEV','QA', 'PROD'], description: "Which Environment?")
+                    choice(name: "TARGET_ENV", choices: ['DEV','QA', 'PROD'], description: "Which Environment?")
                 }
             }
             agent {
@@ -115,12 +115,27 @@ pipeline {
                 }
             }
             steps {
-                echo ("We are Deploying something here 1")
-                echo ("We are Deploying something here 2")
-                sleep(10)
-                echo ("We are Deploying something here 3")
+                echo ("Deploy to ${TARGET_ENV}")
+
             }
         }
+
+        stage('Release') {
+            when {
+                expression {
+                    return params.DEPLOY
+                }
+            }
+            agent {
+                node{
+                    label "linux && java11"
+                }
+            }
+            steps {
+                echo("Release it")
+            }
+        }
+
     }
 
     post {
