@@ -208,7 +208,7 @@ pipeline {
                     passwordVariable: "PASSWORD"
                 )]) {
                     // Corrected quotes and string structure for the shell execution
-                    sh "echo 'Release it with -u $USER -p $PASSWORD' > release.txt"
+                    sh ('echo "Release it with -u $USER -p $PASSWORD" > "release.txt"')
                 }
             }
         }
