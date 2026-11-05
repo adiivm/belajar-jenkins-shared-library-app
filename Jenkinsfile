@@ -10,7 +10,7 @@ pipeline {
     triggers {
         // cron("*/5 * * * *")
         pollSCM("*/1 * * * *")
-        upstream(upstreamProjects: 'job1,job2', threshold:hudson.model.Result.SUCCESS)
+        // upstream(upstreamProjects: 'job1,job2', threshold:hudson.model.Result.SUCCESS)
     }
 
     parameters {
@@ -38,6 +38,18 @@ pipeline {
                     axis {
                         name "ARC"
                         values "32", "64"
+                    }
+                }
+                excludes {
+                    exclude {
+                        axis {
+                            name "OS"
+                            values "mac"
+                        }
+                        axis {
+                            name "ARC"
+                            values "32"
+                        }
                     }
                 }
                 stages {
