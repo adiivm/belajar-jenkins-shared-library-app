@@ -9,7 +9,7 @@ pipeline {
 
     triggers {
         cron("*/5 * * * *")
-        pollSCM("*/5 * * * *")
+        // pollSCM("*/5 * * * *")
         upstream(upstreamProjects: 'job1,job2', threshold:hudson.model.Result.SUCCESS)
     }
 
@@ -27,6 +27,28 @@ pipeline {
     }
     
     stages {
+        stage("Preparation") {
+            agent {
+                node {
+                    label "linux && java11"
+                }
+            }
+            stages {
+                stage("Prepare Java") {
+                    steps {
+                        echo("Prepare Java")
+                    }
+                }
+            }
+            stages {
+                stage("Prepare Maven") {
+                    steps {
+                        echo("Prepare Maven")
+                    }
+                }
+            }
+        }
+        
         stage("Parameter") {
             environment {
                 APP = credentials("adi_kurniadi")
