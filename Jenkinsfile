@@ -7,11 +7,11 @@ pipeline {
         WEB = "https://dekurtz.blogspot.com"
     }
 
-    // triggers {
-    //     // cron("*/5 * * * *")
-    //     // pollSCM("*/5 * * * *")
-    //     upstream(upstreamProjects: 'job1,job2', threshold:hudson.model.Result.SUCCESS)
-    // }
+    triggers {
+        // cron("*/5 * * * *")
+        pollSCM("*/5 * * * *")
+        upstream(upstreamProjects: 'job1,job2', threshold:hudson.model.Result.SUCCESS)
+    }
 
     parameters {
         string(name: "NAME", defaultValue: "Guest", description: "What is your name?")
@@ -27,6 +27,34 @@ pipeline {
     }
     
     stages {
+
+        stage("OS Setup") {
+            matrix {
+                axes {
+                    axis {
+                        name "OS"
+                        values "linux", "windows", "mac"
+                    }
+                    axis {
+                        name "ARC"
+                        values "32", "64"
+                    }
+                }
+            }
+            stages {
+                stage("OS Setup") {
+                    agent {
+                        node {
+                            label "linux && java11"
+                        }
+                    }
+                    steps {
+                        echo("Setup ${OS} ${ARC}")
+                    }
+                }
+            }
+        }
+
         stage("Preparation") {
             
             parallel {
@@ -38,6 +66,7 @@ pipeline {
                     }
                     steps {
                         echo("Prepare Java")
+                        sleep(5)
                     }
                 }
                 stage("Prepare Maven") {
@@ -48,6 +77,7 @@ pipeline {
                     }
                     steps {
                         echo("Prepare Maven")
+                        sleep(5)
                     }
                 }
             }
