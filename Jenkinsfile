@@ -44,6 +44,7 @@ pipeline {
                         echo("Prepare Maven")
                     }
                 }
+            }
 
         }
         
