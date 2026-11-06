@@ -5,6 +5,16 @@ import latihangroovy.jenkins.Output;
 pipeline {
     agent any
     stages {
+        stage("Hello Person") {
+            steps {
+                script {
+                    hello.person([
+                        firstname: "Adi"
+                        lastName: "Kurniadi"
+                    ])
+                }
+            }
+        }
         stage("Maven Compile") {
             steps {
                 script {
