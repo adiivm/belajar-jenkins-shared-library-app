@@ -1,12 +1,25 @@
 @Library("belajar-jenkins-shared-library@main") _
 
+// pipeline {
+//     agent any
+//     stages {
+//         stage("Hello World") {
+//             steps {
+//                 script {
+//                     hello.world()
+//                 }
+//             }
+//         }
+//     }
+// }
+
 pipeline {
     agent any
     stages {
-        stage("Hello World") {
+        stage("Hello Groovy") {
             steps {
                 script {
-                    hello.world()
+                    Output.hello("Groovy")
                 }
             }
         }
