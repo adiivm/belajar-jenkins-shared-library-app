@@ -1,5 +1,6 @@
 @Library("belajar-jenkins-shared-library@main") _
 
+import latihangroovy.jenkins.Output;
 // pipeline {
 //     agent any
 //     stages {
