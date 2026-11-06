@@ -1,6 +1,7 @@
 @Library("belajar-jenkins-shared-library@main") _
 
 import latihangroovy.jenkins.Output;
+
 // pipeline {
 //     agent any
 //     stages {
@@ -20,7 +21,11 @@ pipeline {
         stage("Hello Groovy") {
             steps {
                 script {
-                    Output.hello("Groovy")
+                    // Instantiate the object and pass 'this' (the pipeline context)
+                    def output = new Output(this)
+                    
+                    // Call the method
+                    output.hello("Groovy")
                 }
             }
         }
