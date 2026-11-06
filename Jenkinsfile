@@ -5,6 +5,13 @@ import latihangroovy.jenkins.Output;
 pipeline {
     agent any
     stages {
+        stage("Maven Compile") {
+            steps {
+                script {
+                    maven("clean compile")
+                }
+            }
+        }
         stage("Global Variable"){
             steps {
                 script {
