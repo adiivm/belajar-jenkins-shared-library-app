@@ -2,22 +2,24 @@
 
 import latihangroovy.jenkins.Output;
 
-// pipeline {
-//     agent any
-//     stages {
-//         stage("Hello World") {
-//             steps {
-//                 script {
-//                     hello.world()
-//                 }
-//             }
-//         }
-//     }
-// }
-
 pipeline {
     agent any
     stages {
+        stage("Global Variable"){
+            steps {
+                script {
+                    echo(author.name())
+                    echo(author.channel())
+                }
+            }
+        }
+        stage("Hello World") {
+            steps {
+                script {
+                    hello.world()
+                }
+            }
+        }
         stage("Hello Groovy") {
             steps {
                 script {
